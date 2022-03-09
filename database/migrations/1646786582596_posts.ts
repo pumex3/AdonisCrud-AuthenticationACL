@@ -7,7 +7,7 @@ export default class Posts extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('title')
-      table.text('content', 'longtext').notNullable()
+      table.text('content', 'longtext')
       table.timestamps(true)
     })
   }

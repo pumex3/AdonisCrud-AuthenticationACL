@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Post from 'App/Models/Post'
+import PostValidator from 'App/Validators/PostValidator'
 //import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class PostsController {
@@ -11,8 +12,8 @@ export default class PostsController {
   //public async create ({}: HttpContextContract) {}
 
   public async store ({ request }: HttpContextContract) {
-    const data = request.only(['title', 'content'])
-    const post = await Post.create(data)
+    const {title, content } = await request.validate(PostValidator)
+    const post = await Post.create({title,content})
 
     return post
   }
